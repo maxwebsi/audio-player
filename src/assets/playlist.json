@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1234,
+    "author": "Aretha Franklin",
+    "title": "Respect",
+    "album": "I Never Loved a Man the Way I Love You",
+    "fileName": "aretha-franklin-respect"
+  },
+  {
+    "id": 2123,
+    "author": "Caparezza",
+    "title": "Ti fa stare bene",
+    "album": "Prisoner 709",
+    "fileName": "caparezza-ti-fa-stare-bene"
+  },
+  {
+    "id": 345,
+    "author": "Cat Stevens",
+    "title": "Father and Son",
+    "album": "Tea for the Tillerman",
+    "fileName": "cat-stevens-father-and-son"
+  },
+  {
+    "id": 214,
+    "author": "Dire Straits",
+    "title": "Money For Nothing",
+    "album": "Brothers In Arms",
+    "fileName": "dire-straits-money-for-nothing"
+  },
+  {
+    "id": 541,
+    "author": "Fat Boy Slim",
+    "title": "Praise You",
+    "album": "You've Come a Long Way, Baby",
+    "fileName": "fat-boy-slim-praise-you"
+  },
+  {
+    "id": 643,
+    "author": "George Ezra",
+    "title": "Budapest",
+    "album": "Budapest",
+    "fileName": "george-ezra-budapest"
+  },
+  {
+    "id": 327,
+    "author": "Luca Carboni",
+    "title": "Ci vuole un fisico bestiale",
+    "album": "Carboni",
+    "fileName": "luca-carboni-ci-vuole-un-fisico-bestiale"
+  },
+  {
+    "id": 81,
+    "author": "Pearl Jam",
+    "title": "Black",
+    "album": "Ten",
+    "fileName": "pearl-jam-black"
+  },
+  {
+    "id": 19,
+    "author": "R.E.M.",
+    "title": "Bad day",
+    "album": "In Time",
+    "fileName": "rem-bad-day"
+  },
+  {
+    "id": 1120,
+    "author": "Sam Cooke",
+    "title": "Twistin' the Night Away",
+    "album": "Twistin' the Night Away",
+    "fileName": "sam-cooke-twistin-the-night-away"
+  }
+]
