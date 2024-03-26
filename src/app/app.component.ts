@@ -67,10 +67,10 @@ type Track = {
             </button>
           </div>
           <div class="w-full lg:w-3/4 text-center">
-            {{ (players[trackId]?.currentTime ? players[trackId].currentTime : 0) * 1000 | date: 'mm:ss' }}
+            {{ (players[trackId]?.currentTime ? Math.trunc(players[trackId!].currentTime) : 0) * 1000 | date: 'mm:ss' }}
             <mat-slider id="timer" min="0" [max]="players[trackId]?.duration" step="1" [disabled]="!isPlaying"
               showTickMarks="false" class="w-full">
-              <input matSliderThumb [value]="players[trackId]?.currentTime" (touchmove)="setTime($event)" (mouseup)="setTime($event)">
+              <input matSliderThumb [value]="Math.trunc(players[trackId!].currentTime)" (touchmove)="setTime($event)" (mouseup)="setTime($event)">
             </mat-slider>
             {{ (players[trackId]?.duration ? players[trackId].duration : 0) * 1000 | date: 'mm:ss' }}
           </div>
@@ -334,4 +334,6 @@ export class AppComponent implements OnInit {
   private getRandomPlaylistIndex() {
     return Math.floor(Math.random() * (this.playlist.length - 1))
   }
+
+  protected readonly Math = Math;
 }
