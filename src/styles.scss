@@ -89,4 +89,11 @@ mat-icon.mat-icon {
   }
 }
 
+//Remove volume slider from iOS devices
+@supports (-webkit-touch-callout: none) {
+  #volume-slider {
+    display: none;
+  }
+}
+
 

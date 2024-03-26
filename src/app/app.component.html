@@ -1,0 +1,86 @@
+<div class="py-5">
+  <div class="px-10 container mx-auto flex flex-col lg:flex-row justify-between items-center">
+    <div class="flex gap-2 w-full lg:basis-1/4">
+      <figure>
+        <img [src]="coverUrl" alt="Img" width="80" height="80" />
+      </figure>
+      <div class="flex-col gap-2">
+        <h2 class="text-neutral-400">{{ title }}</h2>
+        <h3 class="text-neutral-500">{{ author }}</h3>
+        <h3 class="text-neutral-500">{{ album }}</h3>
+      </div>
+    </div>
+    <div id="controls" class="flex flex-col items-center lg:basis-1/2">
+      <div>
+        <button mat-icon-button aria-label="Loop this song" [hidden]="repeat" (click)="repeat = !repeat">
+          <mat-icon>repeat</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Disable loop" [hidden]="!repeat" (click)="repeat = !repeat">
+          <mat-icon>repeat_on</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Previous song" (click)="prevSong()" [disabled]="playlistIndex < 1">
+          <mat-icon>skip_previous</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Play song" (click)="play()" [hidden]="isPlaying">
+          <mat-icon>play_circle</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Pause song" (click)="pause()" [hidden]="!isPlaying">
+          <mat-icon>pause</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Next song" (click)="nextSong()"
+          [disabled]="playlistIndex + 1 >= playlist.length">
+          <mat-icon color="accent">skip_next</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Random" [hidden]="random" (click)="random = !random">
+          <mat-icon color="accent">shuffle</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Random" [hidden]="!random" (click)="random = !random">
+          <mat-icon>shuffle_on</mat-icon>
+        </button>
+      </div>
+      <div class="w-full lg:w-3/4 text-center">
+        {{ (players[trackId]?.currentTime ? Math.trunc(players[trackId!].currentTime) : 0) * 1000 | date: 'mm:ss' }}
+        <mat-slider id="timer" min="0" [max]="players[trackId]?.duration" step="1" [disabled]="!isPlaying"
+          showTickMarks="false" class="w-full">
+          <input matSliderThumb [value]="Math.trunc(players[trackId!].currentTime)" (touchmove)="setTime($event)" (mouseup)="setTime($event)">
+        </mat-slider>
+        {{ (players[trackId]?.duration ? players[trackId].duration : 0) * 1000 | date: 'mm:ss' }}
+      </div>
+    </div>
+    <div id="volume" class="flex items-center gap-2 lg:basis-1/4">
+      <button mat-icon-button aria-label="Show queue songs" (click)="showQueue = !showQueue">
+        <mat-icon>queue_music</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="Mute the player audio" (click)="mute()"
+        [hidden]="players[trackId]?.muted">
+        <mat-icon>volume_up</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="Unmute the player audio" (click)="unMute()"
+        [hidden]="!players[trackId]?.muted">
+        <mat-icon>volume_off</mat-icon>
+      </button>
+      <mat-slider id="volume-slider" min="0" max="1" step="0.01">
+        <input matSliderThumb value="1" (touchmove)="setVolume($event)" (mouseup)="setVolume($event)">
+      </mat-slider>
+    </div>
+  </div>
+  <div class="container mx-auto">
+    <table mat-table [dataSource]="playlist" [hidden]="!showQueue">
+      <ng-container matColumnDef="author">
+        <th mat-header-cell *matHeaderCellDef>Author</th>
+        <td mat-cell *matCellDef="let track">{{ track.author }}</td>
+      </ng-container>
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let track">{{ track.title }}</td>
+      </ng-container>
+      <ng-container matColumnDef="album">
+        <th mat-header-cell *matHeaderCellDef>Album</th>
+        <td mat-cell *matCellDef="let track">{{ track.album }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+        class="{{row.id === trackId ? 'current-song' : ''}}" (click)="loadSong(row.id)"></tr>
+    </table>
+  </div>
+</div>
